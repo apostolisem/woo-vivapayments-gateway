@@ -4,7 +4,7 @@
 ** Plugin Name: WooCommerce VivaPayments Gateway
 ** Plugin URI: https://www.wpcare.gr
 ** Description: Adds Vivapayments Gateway to WooCommerce.
-** Version: 1.0.0
+** Version: 1.0.6
 ** Author: WordPress Care
 ** Author URI: https://www.wpcare.gr
 ** License: GNU General Public License v3.0
@@ -238,13 +238,14 @@ class WC_Gateway_VivaPayments extends WC_Payment_Gateway {
 				'redirect'	=>  $response_url.$orderId
 			);
 		} else {
-				$woocommerce->add_error( $this->error_msg );
+				wc_add_notice($this->error_msg, $notice_type = 'error' );
+				//$woocommerce->add_error( $this->error_msg );
 				return array(
 					'result' 	=> 'success',
 					'redirect'	=>  get_site_url().'/checkout/'
-				);
+				);				
 		}
-
+		
 	}
 }
 
@@ -252,19 +253,21 @@ class WC_Gateway_VivaPayments extends WC_Payment_Gateway {
         $methods[] = 'WC_Gateway_VivaPayments';
         return $methods;
     }
-
+ 
     add_filter('woocommerce_payment_gateways', 'woocommerce_add_vivapayments_gateway' );
-
+	
 }
 
 
 /*
 ** Small snippet to add payment methods to admin email notification on new order.
-*/
-add_action( 'woocommerce_email_after_order_table', 'add_payment_method_to_admin_new_order', 15, 2 );
 
+add_action( 'woocommerce_email_after_order_table', 'add_payment_method_to_admin_new_order', 15, 2 );
+ 
 function add_payment_method_to_admin_new_order( $order, $is_admin_email ) {
   if ( $is_admin_email ) {
     echo '<p><strong>Payment Method:</strong> ' . $order->payment_method_title . '</p>';
   }
-}
+}*/
+
+	
