@@ -243,9 +243,9 @@ class WC_Gateway_VivaPayments extends WC_Payment_Gateway {
 				return array(
 					'result' 	=> 'success',
 					'redirect'	=>  get_site_url().'/checkout/'
-				);				
+				);
 		}
-		
+
 	}
 }
 
@@ -253,9 +253,9 @@ class WC_Gateway_VivaPayments extends WC_Payment_Gateway {
         $methods[] = 'WC_Gateway_VivaPayments';
         return $methods;
     }
- 
+
     add_filter('woocommerce_payment_gateways', 'woocommerce_add_vivapayments_gateway' );
-	
+
 }
 
 
@@ -263,11 +263,9 @@ class WC_Gateway_VivaPayments extends WC_Payment_Gateway {
 ** Small snippet to add payment methods to admin email notification on new order.
 
 add_action( 'woocommerce_email_after_order_table', 'add_payment_method_to_admin_new_order', 15, 2 );
- 
+
 function add_payment_method_to_admin_new_order( $order, $is_admin_email ) {
   if ( $is_admin_email ) {
     echo '<p><strong>Payment Method:</strong> ' . $order->payment_method_title . '</p>';
   }
 }*/
-
-	
